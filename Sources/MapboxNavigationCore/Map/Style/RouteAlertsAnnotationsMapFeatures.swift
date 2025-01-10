@@ -4,6 +4,7 @@ import MapboxMaps
 import MapboxNavigationNative
 import enum SwiftUI.ColorScheme
 import UIKit
+import Foundation
 
 extension NavigationRoutes {
     func routeAlertsAnnotationsMapFeatures(
@@ -242,11 +243,19 @@ extension [RoadObjectAhead] {
         }
     }
 
+    public static func resourceBundle() -> Bundle? {
+        let bundle = Bundle(for: MyPodResourceHelper.self)
+        if let resourceBundleURL = bundle.url(forResource: "MapboxNavigationCoreResources", withExtension: "bundle") {
+            return Bundle(url: resourceBundleURL)
+        }
+        return nil
+    }
+
     private static func upsertRouteAlertsSymbolImages(
         map: MapboxMap
     ) {
-        for (imageName, imageIdentifier) in imageNameToMapIdentifier(ids: RoadObjectFeature.ImageType.allCases) {
-            if let image = Bundle.module.image(named: imageName) {
+        for (imageName, imageIdentifier) in imageNameToMapIdentifier(ids: RoadObjectFeature.ImageType.allCases) {            
+            if let image = resourceBundle()?.image(named: imageName) {
                 map.provisionImage(id: imageIdentifier) { _ in
                     try map.addImage(image, id: imageIdentifier)
                 }
