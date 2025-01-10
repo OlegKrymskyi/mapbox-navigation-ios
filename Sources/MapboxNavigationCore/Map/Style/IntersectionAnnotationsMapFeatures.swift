@@ -98,12 +98,20 @@ extension RouteProgress {
         return feature
     }
 
+     public static func resourceBundle() -> Bundle? {
+        let bundle = Bundle(for: MapboxNavigation.self)
+        if let resourceBundleURL = bundle.url(forResource: "MapboxNavigationCoreResources", withExtension: "bundle") {
+            return Bundle(url: resourceBundleURL)
+        }
+        return nil
+    }
+
     private static func upsertIntersectionSymbolImages(
         map: MapboxMap,
         ids: FeatureIds.IntersectionAnnotation
     ) {
         for (imageName, imageIdentifier) in imageNameToMapIdentifier(ids: ids) {
-            if let image = Bundle.module.image(named: imageName) {
+            if let image = resourceBundle()?.image(named: imageName) {
                 map.provisionImage(id: imageIdentifier) { style in
                     try style.addImage(image, id: imageIdentifier)
                 }

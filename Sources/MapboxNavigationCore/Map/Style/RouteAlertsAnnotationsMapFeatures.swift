@@ -244,7 +244,7 @@ extension [RoadObjectAhead] {
     }
 
     public static func resourceBundle() -> Bundle? {
-        let bundle = Bundle(for: MyPodResourceHelper.self)
+        let bundle = Bundle(for: MapboxNavigation.self)
         if let resourceBundleURL = bundle.url(forResource: "MapboxNavigationCoreResources", withExtension: "bundle") {
             return Bundle(url: resourceBundleURL)
         }
