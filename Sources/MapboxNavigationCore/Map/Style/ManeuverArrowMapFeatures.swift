@@ -16,7 +16,7 @@ extension Route {
         else { return [] }
 
         let bundle = Bundle(for: MapboxNavigationProvider.self)
-        let moduleBundle: Bundle? = nil
+        var moduleBundle: Bundle? = nil
         if let resourceBundleURL = bundle.url(forResource: "MapboxNavigationCoreResources", withExtension: "bundle") {
             moduleBundle = Bundle(url: resourceBundleURL)
         }
