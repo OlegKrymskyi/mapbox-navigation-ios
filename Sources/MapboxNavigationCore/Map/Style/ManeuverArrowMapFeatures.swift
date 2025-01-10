@@ -20,6 +20,10 @@ extension Route {
         if let resourceBundleURL = bundle.url(forResource: "MapboxNavigationCoreResources", withExtension: "bundle") {
             moduleBundle = Bundle(url: resourceBundleURL)
         }
+
+        if moduleBundle == nil {
+            return []
+        }
         
         let triangleImage = moduleBundle?.image(named: "triangle")!.withRenderingMode(.alwaysTemplate)
 
