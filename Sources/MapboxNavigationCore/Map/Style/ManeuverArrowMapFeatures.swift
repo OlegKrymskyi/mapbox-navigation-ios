@@ -25,7 +25,7 @@ extension Route {
             return []
         }
         
-        let triangleImage = moduleBundle?.image(named: "triangle")!.withRenderingMode(.alwaysTemplate)
+        let triangleImage = moduleBundle!.image(named: "triangle")!.withRenderingMode(.alwaysTemplate)
 
         var mapFeatures: [any MapFeature] = []
 
