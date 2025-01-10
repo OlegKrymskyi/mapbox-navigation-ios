@@ -4,13 +4,6 @@ import MapboxDirections
 @_spi(Experimental) import MapboxMaps
 
 extension Route {
-    public static func resourceBundle() -> Bundle? {
-        let bundle = Bundle(for: MapboxNavigationProvider.self)
-        if let resourceBundleURL = bundle.url(forResource: "MapboxNavigationCoreResources", withExtension: "bundle") {
-            return Bundle(url: resourceBundleURL)
-        }
-        return nil
-    }
 
     func maneuverArrowMapFeatures(
         ids: FeatureIds.ManeuverArrow,
@@ -22,7 +15,12 @@ extension Route {
         guard containsStep(at: legIndex, stepIndex: stepIndex)
         else { return [] }
 
-        let triangleImage = resourceBundle()?.image(named: "triangle")!.withRenderingMode(.alwaysTemplate)
+        let bundle = Bundle(for: MapboxNavigationProvider.self)
+        if let resourceBundleURL = bundle.url(forResource: "MapboxNavigationCoreResources", withExtension: "bundle") {
+            return Bundle(url: resourceBundleURL)
+        }
+        
+        let triangleImage = bundle?.image(named: "triangle")!.withRenderingMode(.alwaysTemplate)
 
         var mapFeatures: [any MapFeature] = []
 
