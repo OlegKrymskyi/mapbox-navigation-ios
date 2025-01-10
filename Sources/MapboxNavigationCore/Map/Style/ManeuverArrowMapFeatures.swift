@@ -16,11 +16,12 @@ extension Route {
         else { return [] }
 
         let bundle = Bundle(for: MapboxNavigationProvider.self)
+        let moduleBundle: Bundle? = nil
         if let resourceBundleURL = bundle.url(forResource: "MapboxNavigationCoreResources", withExtension: "bundle") {
-            return Bundle(url: resourceBundleURL)
+            moduleBundle = Bundle(url: resourceBundleURL)
         }
         
-        let triangleImage = bundle?.image(named: "triangle")!.withRenderingMode(.alwaysTemplate)
+        let triangleImage = moduleBundle?.image(named: "triangle")!.withRenderingMode(.alwaysTemplate)
 
         var mapFeatures: [any MapFeature] = []
 
