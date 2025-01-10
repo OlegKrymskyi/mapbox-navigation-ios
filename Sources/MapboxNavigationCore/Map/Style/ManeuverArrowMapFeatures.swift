@@ -107,7 +107,7 @@ extension Route {
                     onBeforeAdd: { mapView in
                         mapView.mapboxMap.provisionImage(id: ids.triangleTipImage) {
                             try $0.addImage(
-                                triangleImage,
+                                triangleImage!,
                                 id: ids.triangleTipImage,
                                 sdf: true,
                                 stretchX: [],
