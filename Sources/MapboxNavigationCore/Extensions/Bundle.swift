@@ -27,7 +27,15 @@ extension Bundle {
 #endif
 
     /// The Mapbox Core Navigation framework bundle.
-    public static let mapboxNavigationUXCore: Bundle = .module
+    public static let mapboxNavigationUXCore: Bundle = resourceBundle()!
+
+    private static func resourceBundle() -> Bundle? {
+        let bundle = Bundle(for: MapboxNavigationProvider.self)
+        if let resourceBundleURL = bundle.url(forResource: "MapboxNavigationCoreResources", withExtension: "bundle") {
+            return Bundle(url: resourceBundleURL)
+        }
+        return nil
+    }
 
     /// Provides `Bundle` instance, based on provided bundle name and class inside of it.
     /// - Parameters:
