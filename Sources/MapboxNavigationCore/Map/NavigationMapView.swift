@@ -52,7 +52,7 @@ open class NavigationMapView: UIView {
         navigationCameraType: NavigationCameraType = .mobile,
         heading: AnyPublisher<CLHeading, Never>? = nil,
         predictiveCacheManager: PredictiveCacheManager? = nil,
-        frame: CGRect = Constants.initialMapRect,
+        frame: CGRect = CGRect(x: 0, y: 0, width: 64, height: 64),
         mapInitOptions: MapInitOptions = MapInitOptions()
     ) {
         self.mapView = MapView(frame: frame, mapInitOptions: mapInitOptions).autoresizing()
