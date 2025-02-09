@@ -51,9 +51,11 @@ open class NavigationMapView: UIView {
         routeProgress: AnyPublisher<RouteProgress?, Never>,
         navigationCameraType: NavigationCameraType = .mobile,
         heading: AnyPublisher<CLHeading, Never>? = nil,
-        predictiveCacheManager: PredictiveCacheManager? = nil
+        predictiveCacheManager: PredictiveCacheManager? = nil,
+        frame: CGRect = Constants.initialMapRect,
+        mapInitOptions: MapInitOptions = MapInitOptions()
     ) {
-        self.mapView = MapView(frame: Constants.initialMapRect).autoresizing()
+        self.mapView = MapView(frame: frame, mapInitOptions: mapInitOptions).autoresizing()
         mapView.location.override(
             locationProvider: location.map { [Location(clLocation: $0)] }.eraseToSignal(),
             headingProvider: heading?.map { Heading(from: $0) }.eraseToSignal()
@@ -67,7 +69,7 @@ open class NavigationMapView: UIView {
             heading: heading,
             navigationCameraType: navigationCameraType
         )
-        super.init(frame: Constants.initialMapRect)
+        super.init(frame: frame)
 
         mapStyleManager.customizedLayerProvider = customizedLayerProvider
         setupMapView()
